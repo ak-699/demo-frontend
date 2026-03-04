@@ -5,12 +5,12 @@ on:
       - main
 
 jobs:
-  format:
+  ci-format:
     uses: ./.github/workflows/prettier.yml
-  lint:
+  ci-lint:
     uses: ./.github/workflows/lint.yml
-  build:
-    needs: [format, lint]
+  ci-build:
+    needs: [ci-format, ci-lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
