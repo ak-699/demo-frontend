@@ -6,25 +6,9 @@ on:
 
 jobs:
   format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run format:check
+    uses: ./.github/workflows/prettier.yml
   lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
+    uses: ./.github/workflows/lint.yml
   build:
     needs: [format, lint]
     runs-on: ubuntu-latest
