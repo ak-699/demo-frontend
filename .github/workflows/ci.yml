@@ -5,28 +5,12 @@ on:
       - main
 
 jobs:
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run format:check
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
-  build:
-    needs: [format, lint]
+  ci-format:
+    uses: ./.github/workflows/prettier.yml
+  ci-lint:
+    uses: ./.github/workflows/lint.yml
+  ci-build:
+    needs: [ci-format, ci-lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
