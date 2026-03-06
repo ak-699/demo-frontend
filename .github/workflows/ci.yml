@@ -14,6 +14,4 @@ jobs:
       - run: echo "hehe ${{secrets.HEHE}}"
   bye:
     if: github.base_ref == 'main'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "running on main"
+    uses: ./.github/workflows/bye.yml
