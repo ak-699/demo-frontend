@@ -13,3 +13,5 @@ jobs:
           echo "Ref name: ${{github.ref_name}}"
           echo "Commit: ${{github.sha}}"
           echo "env: ${{github.env}}"
+          echo "Head ref: ${{github.head_ref}}"
+          echo "Base ref: ${{github.base_ref}}"
