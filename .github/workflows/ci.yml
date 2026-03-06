@@ -12,6 +12,8 @@ jobs:
     steps:
       - run: echo "Deploying to ${{secrets.CLOUDFRONT_ID}}"
       - run: echo "hehe ${{secrets.HEHE}}"
-  bye:
-    if: github.base_ref == 'main'
+  ci-bye:
+    if: github.base_ref == 'production'
     uses: ./.github/workflows/bye.yml
+    with:
+      runs-on: 'ubuntu-latest'

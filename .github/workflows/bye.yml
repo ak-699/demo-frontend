@@ -1,7 +1,12 @@
 name: BYE
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        required: true
+        type: string
 jobs:
   bye:
-    runs-on: ubuntu-latest
+    runs-on: '${{inputs.runs-on}}'
     steps:
       - run: echo
