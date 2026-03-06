@@ -2,37 +2,18 @@ name: CI
 on:
   pull_request:
     branches:
-      - main
+      - production
 
 jobs:
-  format:
+  hello:
+    if: github.base_ref == 'production'
+    environment: production
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run format:check
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
-  build:
-    needs: [format, lint]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run build
+      - run: echo "Deploying to ${{secrets.CLOUDFRONT_ID}}"
+      - run: echo "hehe ${{secrets.HEHE}}"
+  ci-bye:
+    if: github.base_ref == 'production'
+    uses: ./.github/workflows/bye.yml
+    with:
+      runs-on: 'ubuntu-latest'
