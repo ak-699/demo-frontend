@@ -10,3 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "current branch is production"
+  bye:
+    if: github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "running on main"
